@@ -4,7 +4,7 @@
     box-sizing: border-box;
 }
 html{
-    scroll-behavior: smooth;
+    scroll-behavior: smoothm;
 }
 body {
     font-family: 'Arial', sans-serif;
@@ -1883,5 +1883,109 @@ nav button:hover a {
 
     .background-elements .speckle-right {
         width: 100px;
+    }
+}
+/* scrolling images */
+.image-scroller-section {
+    background-color: black;
+    padding: 30px 0; /* Add some vertical padding */
+    overflow: hidden; /* Hide overflowing content */
+}
+
+.scroller-container {
+    position: relative;
+    max-width: 1200px; /* Limit the width of the scroller */
+    margin: 0 auto; /* Center the container */
+    display: flex;
+    align-items: center; /* Vertically align arrows and carousel */
+}
+
+.image-carousel {
+    display: flex;
+    overflow-x: scroll; /* Enable horizontal scrolling */
+    scroll-behavior: smooth; /* Smooth scrolling effect */
+    -webkit-overflow-scrolling: touch; /* Improve scrolling on iOS */
+    white-space: nowrap; /* Prevent images from wrapping */
+    padding: 20px 0; /* Add some padding around images */
+    scrollbar-width: none; /* Hide scrollbar for Firefox */
+    -ms-overflow-style: none; /* Hide scrollbar for IE/Edge */
+}
+
+.image-carousel::-webkit-scrollbar {
+    display: none; /* Hide scrollbar for Chrome, Safari, Opera */
+}
+
+.image-carousel img {
+    width: 200px; /* Initial width of images */
+    height: 150px; /* Initial height of images */
+    object-fit: cover; /* Maintain aspect ratio */
+    margin: 0 10px; /* Space between images */
+    transition: transform 0.3s ease-in-out; /* Smooth transition for scaling */
+    flex-shrink: 0; /* Prevent images from shrinking */
+    border: 2px solid #333; /* Optional: add a border */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* Optional: add a shadow */
+}
+
+/* Grow effect on HOVER */
+.image-carousel img:hover {
+    transform: scale(1.2); /* Image grows on hover */
+    border-color: white; /* Optional: change border color on hover */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.7); /* Optional: enhance shadow on hover */
+    cursor: pointer; /* Indicate it's clickable/interactive */
+}
+
+.nav-arrow {
+    background-color: rgba(255, 255, 255, 0.7);
+    border: none;
+    color: black;
+    font-size: 2em;
+    padding: 10px 15px;
+    cursor: pointer;
+    z-index: 10; /* Ensure arrows are above images */
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    border-radius: 50%; /* Make them circular */
+    transition: background-color 0.3s ease;
+}
+
+.nav-arrow:hover {
+    background-color: rgba(255, 255, 255, 0.9);
+}
+
+.left-arrow {
+    left: 10px;
+}
+
+.right-arrow {
+    right: 10px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .image-carousel img {
+        width: 150px;
+        height: 100px;
+    }
+    .nav-arrow {
+        font-size: 1.5em;
+        padding: 8px 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    .image-carousel img {
+        width: 120px;
+        height: 80px;
+    }
+    .nav-arrow {
+        font-size: 1.2em;
+        padding: 6px 10px;
+    }
+    .left-arrow {
+        left: 5px;
+    }
+    .right-arrow {
+        right: 5px;
     }
 }
