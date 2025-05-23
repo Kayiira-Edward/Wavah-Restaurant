@@ -480,18 +480,15 @@ nav button:hover a {
     overflow: hidden;
 }
 
-/* Add decorative elements (leaves) if desired */
 .food-section::before,
 .food-section::after {
     content: '';
     position: absolute;
     width: 200px;
-    /* Adjust size as needed */
     height: 200px;
     background-size: contain;
     background-repeat: no-repeat;
     opacity: 0.8;
-    /* Adjust opacity */
     transition: transform 0.5s ease;
     opacity: 0;
     animation: leafAppear 1.5s forwards;
@@ -499,9 +496,8 @@ nav button:hover a {
 
 .food-section::before {
     background-image: url('photos/leaf (1).png');
-    /* Replace with your leaf image */
-    top: -50px; /* Start off-screen */
-    left: -50px; /* Start off-screen */
+    top: -50px; 
+    left: -50px; 
     transform: rotate(10deg);
     animation-delay: 0.8s;
 }
@@ -512,9 +508,8 @@ nav button:hover a {
 
 .food-section::after {
     background-image: url('photos/leaf (1).png');
-    /* Replace with your leaf image */
-    bottom: -50px; /* Start off-screen */
-    right: -50px; /* Start off-screen */
+    bottom: -50px; 
+    right: -50px; 
     transform: rotate(-10deg);
     animation-delay: 1s;
 }
@@ -526,15 +521,14 @@ nav button:hover a {
 @keyframes leafAppear {
     to {
         opacity: 0.8;
-        top: 0; /* Adjust to final position */
-        left: 0; /* Adjust to final position */
-        bottom: 0; /* Adjust to final position */
-        right: 0; /* Adjust to final position */
+        top: 0;  
+        left: 0;  
+        bottom: 0;  
+        right: 0;  
     }
 }
 
 
-/* Section Title */
 .section-title-wrapper {
     margin-bottom: 50px;
     opacity: 0;
@@ -555,11 +549,9 @@ nav button:hover a {
     color: #fc8608;
 }
 
-/* Food Item Grid */
 .food-item-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    /* Responsive grid */
     gap: 30px;
     max-width: 1200px;
     margin: 0 auto;
@@ -567,10 +559,8 @@ nav button:hover a {
     align-items: flex-start;
 }
 
-/* Food Card */
 .food-card {
     background-color: #1a1a1a;
-    /* Slightly lighter dark background for items */
     border-radius: 10px;
     padding: 20px;
     display: flex;
@@ -581,10 +571,9 @@ nav button:hover a {
     opacity: 0;
     transform: scale(0.8);
     animation: cardScaleIn 0.8s forwards;
-    animation-delay: var(--card-delay); /* Staggered animation */
+    animation-delay: var(--card-delay); 
 }
 
-/* Staggered animation delays for food cards */
 .food-card:nth-child(1) { --card-delay: 0.6s; }
 .food-card:nth-child(2) { --card-delay: 0.7s; }
 .food-card:nth-child(3) { --card-delay: 0.8s; }
@@ -607,27 +596,22 @@ nav button:hover a {
 
 .food-image-container {
     width: 180px;
-    /* Adjust size of the circular image container */
     height: 180px;
     border-radius: 50%;
     overflow: hidden;
     margin-bottom: 20px;
     background-color: #fff;
-    /* White background for the plate effect */
     display: flex;
     justify-content: center;
     align-items: center;
     box-shadow: 0 0 0 8px rgba(255, 255, 255, 0.1);
-    /* Subtle border for the plate */
 }
 
 .food-image-container img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    /* Ensures image covers the circle */
     border-radius: 50%;
-    /* Make image circular within its container */
     transition: transform 0.3s ease;
 }
 
@@ -646,10 +630,8 @@ nav button:hover a {
     font-weight: 600;
     color: #fff;
     height: 3em;
-    /* Ensure consistent height for titles */
     display: -webkit-box;
     -webkit-line-clamp: 2;
-    /* Limit to 2 lines */
     -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -666,14 +648,12 @@ nav button:hover a {
     align-items: center;
     width: 100%;
     padding: 0 10px;
-    /* Padding to prevent price and button from touching edges */
 }
 
 .food-card-footer .food-price {
     font-size: 1.6em;
     font-weight: 700;
     color: #FFD700;
-    /* Gold color for price */
     transition: color 0.3s ease;
 }
 
@@ -683,7 +663,6 @@ nav button:hover a {
 
 .add-to-order-btn {
     background-color: #FFD700;
-    /* Gold background for button */
     color: #000;
     border: none;
     border-radius: 50%;
@@ -699,23 +678,20 @@ nav button:hover a {
 
 .add-to-order-btn:hover {
     background-color: #e6c200;
-    /* Slightly darker gold on hover */
     transform: scale(1.05);
 }
 
-/* View All Button */
 .view-all-button-wrapper {
     margin-top: 60px;
     opacity: 0;
     transform: translateY(30px);
     animation: fadeInSlideUp 1s forwards;
-    animation-delay: 1.2s; /* Adjust delay as needed */
+    animation-delay: 1.2s; 
 }
 
 .view-all-button-wrapper a {
     text-decoration: none;
     background-color: #FFD700;
-    /* Gold background */
     color: #000;
     border: none;
     padding: 15px 40px;
@@ -733,36 +709,27 @@ nav button:hover a {
     transform: translateY(-2px);
 }
 
-/* Responsive Design */
-/* */
+
 .second-container {
     max-width: 1200px;
-    /* Adjust as needed */
     margin: 0 auto;
     padding: 0 20px;
     box-sizing: border-box;
 }
 
-/* Service Section Styling */
 .service-section {
     position: relative;
     padding: 100px 0;
-    /* Adjust padding as needed */
     background-color: #000;
-    /* Ensure black background for the section */
     overflow: hidden;
-    /* To contain absolute positioned elements */
 }
 
 .service-content {
     text-align: center;
     max-width: 800px;
-    /* Limit content width for better readability */
     margin: 0 auto;
     position: relative;
-    /* For z-index if needed against bg elements */
     z-index: 2;
-    /* Ensure content is above background elements */
     opacity: 0;
     transform: translateY(50px);
     animation: fadeInSlideUp 1s forwards;
@@ -771,47 +738,41 @@ nav button:hover a {
 
 .service-content h1 {
     font-family: 'Playfair Display', serif;
-    /* A good serif for headings */
     font-size: 3.5em;
-    /* Large heading */
     color: #fff;
     margin-bottom: 20px;
     line-height: 1.2;
-    transition: color 0.3s ease, transform 0.5s ease; /* Added transform for animation */
+    transition: color 0.3s ease, transform 0.5s ease; 
 }
 
 .service-content h1:hover {
     color: #fc8608;
-    transform: translateX(10px); /* Animation on hover */
+    transform: translateX(10px); 
 }
 
 .service-content p {
     font-size: 1.1em;
     line-height: 1.6;
     color: #ccc;
-    /* Slightly lighter white for paragraph */
     margin-bottom: 40px;
-    transition: opacity 0.5s ease; /* Animation for paragraph */
+    transition: opacity 0.5s ease; 
 }
 
 .service-content p:hover {
-    opacity: 0.8; /* Subtle fade on hover */
+    opacity: 0.8; 
 }
 
 .service-cards {
     display: flex;
     flex-wrap: wrap;
-    /* Allow cards to wrap on smaller screens */
     justify-content: center;
     gap: 20px;
-    /* Space between cards */
     margin-top: 50px;
 }
 
 .service-cards .card {
     background-color: transparent;
     border: 1px solid #555;
-    /* Subtle border for cards */
     color: #fff;
     padding: 15px 30px;
     border-radius: 5px;
@@ -822,14 +783,12 @@ nav button:hover a {
 
 .service-cards .card:hover {
     background-color: #333;
-    /* Slightly darker on hover */
     border-color: #777;
-    transform: translateY(-8px) scale(1.02); /* Enhanced animation on hover */
+    transform: translateY(-8px) scale(1.02); 
     color: #fc8608;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4); /* Added subtle shadow */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4); /
 }
 
-/* Background Elements (You'll need image assets for these) */
 .bg-elements {
     position: absolute;
     top: 0;
@@ -837,42 +796,35 @@ nav button:hover a {
     width: 100%;
     height: 100%;
     pointer-events: none;
-    /* Allows clicks to pass through */
     z-index: 1;
-    /* Behind the content */
 }
 
 .left-leaf {
     position: absolute;
     top: 50%;
-    /* Adjust vertical position */
     left: 0;
     transform: translateY(-50%);
     width: 150px;
-    /* Adjust size */
     opacity: 0.6;
-    /* Slightly transparent */
-    transition: transform 0.7s ease-in-out, opacity 0.5s ease; /* Smoother animation */
+    transition: transform 0.7s ease-in-out, opacity 0.5s ease; 
 }
 
 .left-leaf:hover {
-    transform: translateY(-50%) translateX(20px) rotate(15deg); /* More pronounced animation */
+    transform: translateY(-50%) translateX(20px) rotate(15deg); 
     opacity: 0.8;
 }
 
 .right-leaf {
     position: absolute;
     top: 10%;
-    /* Adjust vertical position */
     right: 0;
     width: 100px;
-    /* Adjust size */
     opacity: 0.6;
-    transition: transform 0.7s ease-in-out, opacity 0.5s ease; /* Smoother animation */
+    transition: transform 0.7s ease-in-out, opacity 0.5s ease; 
 }
 
 .right-leaf:hover {
-    transform: translateY(20px) translateX(-20px) rotate(-15deg); /* More pronounced animation */
+    transform: translateY(20px) translateX(-20px) rotate(-15deg); 
     opacity: 0.8;
 }
 
@@ -881,18 +833,16 @@ nav button:hover a {
     bottom: 0;
     right: 0;
     width: 250px;
-    /* Adjust size */
     opacity: 0.8;
-    transition: transform 0.7s ease-in-out, opacity 0.5s ease; /* Smoother animation */
+    transition: transform 0.7s ease-in-out, opacity 0.5s ease; 
 }
 
 .spices:hover {
-    transform: translateY(-20px) translateX(-20px) scale(1.05); /* More pronounced animation */
+    transform: translateY(-20px) translateX(-20px) scale(1.05); 
     opacity: 1;
 }
 
-/* Responsive Design */
-/* */
+
 
 .third-container {
     max-width: 1200px;
@@ -900,32 +850,26 @@ nav button:hover a {
     padding: 20px;
 }
 
-/* Testimonials Section */
 .testimonials-section {
     position: relative;
     padding: 100px 0;
     overflow: hidden;
-    /* To contain background elements */
     background-color: #000;
-    /* Ensure black background */
 }
 
-/* Background Decorative Elements */
+
 .background-elements .leaf-left {
     position: absolute;
     top: 10%;
     left: 0;
     width: 150px;
-    /* Adjust size as needed */
     z-index: 0;
-    /* Behind content */
     opacity: 0.8;
-    /* Slightly translucent */
-    transition: transform 0.6s ease-out, opacity 0.4s ease; /* Smoother animation */
+    transition: transform 0.6s ease-out, opacity 0.4s ease; 
 }
 
 .background-elements .leaf-left:hover {
-    transform: translateX(15px) rotate(15deg) scale(1.05); /* More pronounced animation */
+    transform: translateX(15px) rotate(15deg) scale(1.05); 
     opacity: 1;
 }
 
@@ -934,20 +878,16 @@ nav button:hover a {
     top: 0;
     right: 0;
     width: 250px;
-    /* Adjust size as needed */
     z-index: 0;
-    /* Behind content */
     opacity: 0.5;
-    /* More translucent */
-    transition: transform 0.6s ease-out, opacity 0.4s ease; /* Smoother animation */
+    transition: transform 0.6s ease-out, opacity 0.4s ease; 
 }
 
 .background-elements .speckle-right:hover {
-    transform: translateX(-15px) rotate(-15deg) scale(1.05); /* More pronounced animation */
+    transform: translateX(-15px) rotate(-15deg) scale(1.05); 
     opacity: 0.7;
 }
 
-/* Section Title */
 .section-title {
     font-family: 'Playfair Display', serif;
     font-size: 3.5em;
@@ -955,49 +895,40 @@ nav button:hover a {
     margin-bottom: 60px;
     color: #fff;
     position: relative;
-    /* To bring it above background elements */
     z-index: 1;
-    transition: color 0.3s ease, letter-spacing 0.4s ease; /* Added letter-spacing animation */
+    transition: color 0.3s ease, letter-spacing 0.4s ease; 
 }
 
 .section-title:hover {
     color: #fc8608;
-    letter-spacing: 2px; /* Animation on hover */
+    letter-spacing: 2px; 
 }
 
-/* Testimonial Content Layout */
 .testimonial-content {
     display: flex;
     flex-direction: row;
-    /* Default desktop layout */
     align-items: center;
     justify-content: center;
     gap: 50px;
-    /* Space between card and image */
     position: relative;
     z-index: 1;
-    /* Ensure content is above background */
 }
 
-/* Testimonial Card (the speech bubble) */
 .testimonial-card {
     background-color: #1a1a1a;
-    /* Darker grey background for the card */
     border-radius: 15px;
     padding: 40px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
     flex: 1;
-    /* Allows it to grow and shrink */
     max-width: 600px;
-    /* Max width for the text block */
     position: relative;
-    transition: transform 0.4s ease, box-shadow 0.4s ease, background-color 0.3s ease; /* Added background-color animation */
+    transition: transform 0.4s ease, box-shadow 0.4s ease, background-color 0.3s ease; 
 }
 
 .testimonial-card:hover {
-    transform: translateY(-10px) scale(1.01); /* Enhanced animation */
-    box-shadow: 0 18px 45px rgba(0, 0, 0, 0.8); /* More pronounced shadow */
-    background-color: #2a2a2a; /* Subtle background change */
+    transform: translateY(-10px) scale(1.01); 
+    box-shadow: 0 18px 45px rgba(0, 0, 0, 0.8); 
+    background-color: #2a2a2a; 
 }
 
 .customer-feedback {
@@ -1005,13 +936,12 @@ nav button:hover a {
     line-height: 1.6;
     margin-bottom: 25px;
     font-style: italic;
-    /* Match the image */
     color: #f0f0f0;
-    transition: color 0.3s ease; /* Animation for feedback text */
+    transition: color 0.3s ease; 
 }
 
 .testimonial-card:hover .customer-feedback {
-    color: #fff; /* Slightly brighter text */
+    color: #fff; 
 }
 
 .customer-name {
@@ -1023,7 +953,7 @@ nav button:hover a {
 }
 
 .testimonial-card:hover .customer-name {
-    color: #fc8608; /* Changed to orange on hover */
+    color: #fc8608; 
 }
 
 .customer-title {
@@ -1034,82 +964,55 @@ nav button:hover a {
 /* Customer Image */
 .customer-image {
     flex-shrink: 0;
-    /* Prevents image from shrinking */
     width: 300px;
-    /* Fixed width for the image container */
     height: 300px;
-    /* Fixed height for the image container */
     border-radius: 50%;
-    /* Makes the image circular */
     overflow: hidden;
-    /* Hides parts of the image outside the circle */
     border: 5px solid #333;
-    /* Optional subtle border */
     display: flex;
-    /* For centering the image inside */
     justify-content: center;
     align-items: center;
     background-color: #222;
-    /* Placeholder background if image isn't perfect circle */
-    transition: transform 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease; /* Added box-shadow animation */
+    transition: transform 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease; 
 }
 
 .customer-image:hover {
-    transform: scale(1.1); /* More pronounced scale */
-    border-color: #fc8608; /* Changed to orange on hover */
-    box-shadow: 0 0 20px rgba(252, 134, 8, 0.6); /* Glowing effect */
+    transform: scale(1.1); 
+    border-color: #fc8608; 
+    box-shadow: 0 0 20px rgba(252, 134, 8, 0.6); 
 }
 
 .customer-image img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    /* Ensures the image covers the circular area without distortion */
     display: block;
-    /* Removes extra space below image */
+
 }
 
 
 /* --- Responsive Design --- */
-
-/* For Tablets and smaller desktops */
-
-/* footer */
-/* Footer Specific Styles */
 .site-footer {
     background-color: #1a1a1a;
-    /* Dark background for the footer */
     color: #f0f0f0;
-    /* Light text color */
     padding: 60px 0 20px;
-    /* Top, horizontal, bottom padding */
     position: relative;
-    /* For positioning the leaf */
     overflow: hidden;
-    /* To contain absolute positioned elements like the leaf */
 }
 
 .footer-container {
     max-width: 1200px;
-    /* Max width for the content */
     margin: 0 auto;
-    /* Center the container */
     padding: 0 20px;
-    /* Horizontal padding for smaller screens */
 }
 
-/* Background Leaf Image */
 .footer-leaf {
     position: absolute;
     bottom: -10px;
-    /* Adjust as needed */
     left: -50px;
-    /* Adjust as needed */
     width: 200px;
-    /* Or adjust to your image size */
     height: 200px;
-    /* Ensure it's behind text */
-    transition: transform 0.6s ease-out; /* Smoother animation */
+    transition: transform 0.6s ease-out; 
 }
 
 .footer-leaf:hover {
