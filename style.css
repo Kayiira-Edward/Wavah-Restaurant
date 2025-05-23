@@ -1,25 +1,32 @@
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
-body{
+html{
+    scroll-behavior: smooth;
+}
+body {
     font-family: 'Arial', sans-serif;
     background-color: #000000;
     color: #ffffff;
+    overflow-x: hidden; /* Prevent horizontal scroll due to animations */
 }
-#header{
+
+#header {
     width: 100%;
     height: 100vh;
     background-image: url("photos/head-bg.jpg");
     background-size: cover;
     background-position: center;
+    overflow: hidden; /* Hide overflowing elements for animations */
 }
+
 /* .container{
     padding: 10px 10%;
 
 } */
-nav{
+nav {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -28,112 +35,273 @@ nav{
     background: linear-gradient(to right, black 30%, transparent 100%);
     position: fixed;
     width: 100%;
+    z-index: 1000; /* Ensure nav is on top */
+    transform: translateY(-100%); /* Start off-screen */
+    animation: navSlideIn 0.8s forwards;
+    animation-delay: 0.5s;
 }
-.logo{
+
+@keyframes navSlideIn {
+    to {
+        transform: translateY(0);
+    }
+}
+
+.logo {
     width: 50px;
+    opacity: 0;
+    animation: fadeIn 1s forwards;
+    animation-delay: 1.2s;
 }
-nav ul li{
+
+nav ul li {
     display: inline-block;
     text-decoration: none;
     margin: 10px 20px;
 }
-nav ul li a{
+
+nav ul li a {
     color: white;
-    text-decoration: none; 
+    text-decoration: none;
+    position: relative; /* For the underline effect */
+    transition: color 0.3s ease;
+    opacity: 0;
+    animation: fadeIn 0.8s forwards;
+    animation-delay: var(--delay); /* Use CSS variables for staggered animation */
 }
-nav button{
+
+nav ul li a::after {
+    content: '';
+    width: 0;
+    height: 3px;
+    background: #fc8608;
+    position: absolute;
+    left: 0;
+    bottom: -6px;
+    transition: 0.3s;
+}
+
+nav ul li a:hover {
+    color: #fc8608;
+}
+
+nav ul li a:hover::after {
+    width: 100%;
+}
+
+
+nav button {
     padding: 10px 20px;
     border: solid 1px #fc8608;
     background-color: #fc8608;
     border-radius: 20px;
+    transition: background-color 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
+    opacity: 0;
+    animation: scaleIn 0.5s forwards;
+    animation-delay: 1.8s;
 }
-nav button a{
+
+nav button a {
     text-decoration: none;
     color: rgb(0, 0, 0);
     font-weight: bolder;
+    transition: color 0.3s ease;
 }
-.header-text{
+
+nav button:hover {
+    background-color: #e37c05;
+    border-color: #e37c05;
+    transform: translateY(-2px);
+}
+
+nav button:hover a {
+    color: rgb(255, 255, 255);
+}
+
+.header-text {
     background: linear-gradient(to right, black 30%, transparent 100%);
     padding: 200px 20px 10px 100px;
     font-size: 40px;
     width: 100%;
     height: 100vh;
+    position: relative; /* For absolute positioning of elements */
+    overflow: hidden;
 }
-.header-text p{
+
+.header-text p {
     font-size: 30px;
     margin-top: 20px;
+    transform: translateX(-100%);
+    animation: slideInLeft 1s forwards;
+    animation-delay: 2s;
 }
-.header-text h1{
+
+.header-text h1 {
     font-size: 70px;
     margin-top: 20px;
+    transform: translateX(-100%);
+    animation: slideInLeft 1s forwards;
+    animation-delay: 2.2s;
 }
-.header-text h1 span{
+
+.header-text h1 span {
     color: #e37c05;
 }
-.header-text button{
+
+.header-text button {
     padding: 10px;
     margin-top: 20px;
-
     border: solid 1px #ffffff;
     background-color: #8d4d05;
     border-radius: 20px;
+    transition: background-color 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
+    opacity: 0;
+    animation: scaleIn 0.5s forwards;
+    animation-delay: 2.5s;
 }
-.header-text button a{
+
+.header-text button a {
     text-decoration: none;
     color: white;
+    transition: color 0.3s ease;
 }
-.header-text .chicken{
+
+.header-text button:hover {
+    background-color: #a05a07;
+    border-color: #a05a07;
+    transform: translateY(-2px);
+}
+
+.header-text button:hover a {
+    color: rgb(255, 255, 255);
+}
+
+.header-text .chicken {
     position: absolute;
     width: 200px;
     left: 100px;
-    bottom: 10px;
+    bottom: -200px; /* Start off-screen */
+    transition: transform 0.3s ease;
+    animation: slideInUp 1s forwards;
+    animation-delay: 2.8s;
 }
-.header-text .coffee{
+
+.header-text .chicken:hover {
+    transform: scale(1.05) rotate(-5deg);
+}
+
+.header-text .coffee {
     position: absolute;
     width: 300px;
     left: 400px;
-    bottom: -40px
+    bottom: -200px; /* Start off-screen */
+    transition: transform 0.3s ease;
+    animation: slideInUp 1s forwards;
+    animation-delay: 3s;
 }
-.header-text .leaf{
+
+.header-text .coffee:hover {
+    transform: scale(1.05) rotate(5deg);
+}
+
+.header-text .leaf {
     position: absolute;
     width: 100px;
     left: 400px;
-    top: 170px;
+    top: 0px; /* Start off-screen */
     transform: rotate(60deg);
-    transition: transform 0.3s ease; 
+    transition: transform 0.3s ease;
+    animation: slideInDown 1s forwards;
+    animation-delay: 3.2s;
 }
+
+.header-text .leaf:hover {
+    transform: rotate(70deg) scale(1.1);
+}
+
+/* General Animations */
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideInLeft {
+    to {
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideInUp {
+    to {
+        bottom: 10px; /* Adjust to final position */
+    }
+}
+
+@keyframes slideInDown {
+    to {
+        top: 170px; /* Adjust to final position */
+    }
+}
+
+@keyframes scaleIn {
+    0% {
+        transform: scale(0);
+        opacity: 0;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+
 /* pre-menu */
-.container{
+.container {
     max-width: 1200px;
     margin: 0 auto;
     padding: 20px;
-    position: relative; /* For z-index to bring content above decorations */
+    position: relative;
+    /* For z-index to bring content above decorations */
     z-index: 1;
 }
 
 /* Menu Section Styles */
 .menu-section {
     position: relative;
-    padding: 80px 0; /* Adjust padding as needed */
+    padding: 80px 0;
+    /* Adjust padding as needed */
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    min-height: 100vh; /* Make section at least full viewport height */
-    overflow: hidden; /* Hide overflowing parts of background elements */
+    min-height: 100vh;
+    /* Make section at least full viewport height */
+    overflow: hidden;
+    /* Hide overflowing parts of background elements */
 }
 
 /* Menu Header Styles */
 .menu-header {
     text-align: center;
     margin-bottom: 60px;
+    opacity: 0;
+    transform: translateY(50px);
+    animation: fadeInSlideUp 1s forwards;
+    animation-delay: 0.5s; /* Adjust delay as needed */
 }
 
 .menu-header h1 {
     font-family: 'Playfair Display', serif;
-    font-size: 3.5em; /* Adjust as needed */
+    font-size: 3.5em;
+    /* Adjust as needed */
     line-height: 1.2;
     margin-bottom: 15px;
+    transition: color 0.3s ease;
+}
+
+.menu-header h1:hover {
+    color: #e37c05;
 }
 
 .menu-header p {
@@ -147,22 +315,46 @@ nav button a{
 .menu-item {
     display: flex;
     align-items: center;
-    gap: 40px; /* Space between image and text */
+    gap: 40px;
+    /* Space between image and text */
     max-width: 900px;
-    margin: 0 auto;
-    background-color: rgba(0, 0, 0, 0.5); /* Slightly transparent background for the item card if desired */
+    margin: 30px auto; /* Add margin to separate items */
+    background-color: rgba(0, 0, 0, 0.5);
+    /* Slightly transparent background for the item card if desired */
     padding: 30px;
     border-radius: 10px;
-    flex-wrap: wrap; /* Allow wrapping on smaller screens */
-    justify-content: center; /* Center items when wrapped */
+    flex-wrap: wrap;
+    /* Allow wrapping on smaller screens */
+    justify-content: center;
+    /* Center items when wrapped */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    opacity: 0;
+    transform: translateY(50px);
+    animation: fadeInSlideUp 1s forwards;
+    animation-delay: var(--item-delay); /* Staggered animation */
+}
+
+.menu-item:nth-child(1) { --item-delay: 0.7s; }
+.menu-item:nth-child(2) { --item-delay: 0.9s; }
+.menu-item:nth-child(3) { --item-delay: 1.1s; }
+
+
+.menu-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.7);
 }
 
 .item-image {
-    flex-shrink: 0; /* Prevent image from shrinking */
-    width: 300px; /* Adjust image width */
-    height: 300px; /* Adjust image height to make it square or desired ratio */
-    overflow: hidden; /* Hide parts of the image if it exceeds its container */
-    border-radius: 50%; /* Make the image circular if desired, or remove for rectangular */
+    flex-shrink: 0;
+    /* Prevent image from shrinking */
+    width: 300px;
+    /* Adjust image width */
+    height: 300px;
+    /* Adjust image height to make it square or desired ratio */
+    overflow: hidden;
+    /* Hide parts of the image if it exceeds its container */
+    border-radius: 50%;
+    /* Make the image circular if desired, or remove for rectangular */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -171,22 +363,36 @@ nav button a{
 .item-image img {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* Cover the container while maintaining aspect ratio */
+    object-fit: cover;
+    /* Cover the container while maintaining aspect ratio */
     display: block;
-    transform: rotate(-10deg); /* Slight rotation as seen in the image */
+    transform: rotate(-10deg);
+    /* Slight rotation as seen in the image */
+    transition: transform 0.3s ease;
+}
+
+.menu-item:hover .item-image img {
+    transform: rotate(0deg) scale(1.05);
 }
 
 .item-details {
     flex-grow: 1;
-    max-width: 500px; /* Limit text width */
+    max-width: 500px;
+    /* Limit text width */
     text-align: left;
 }
 
 .item-details h2 {
     font-family: 'Playfair Display', serif;
-    font-size: 2.5em; /* Adjust as needed */
+    font-size: 2.5em;
+    /* Adjust as needed */
     margin-bottom: 15px;
     line-height: 1.2;
+    transition: color 0.3s ease;
+}
+
+.item-details h2:hover {
+    color: #ffcc00;
 }
 
 .item-details p {
@@ -198,32 +404,61 @@ nav button a{
 .item-details .price {
     font-family: 'Poppins', sans-serif;
     font-weight: 600;
-    font-size: 2.2em; /* Adjust as needed */
-    color: #ffcc00; /* Example accent color for price, adjust to your brand */
+    font-size: 2.2em;
+    /* Adjust as needed */
+    color: #ffcc00;
+    /* Example accent color for price, adjust to your brand */
+    transition: transform 0.3s ease;
+}
+
+.menu-item:hover .item-details .price {
+    transform: translateX(5px);
 }
 
 /* Leaf Decorations (Absolute Positioning) */
 .leaf-decoration {
     position: absolute;
-    z-index: 0; /* Behind the content */
+    z-index: 0;
+    /* Behind the content */
+    transition: transform 0.5s ease;
+    opacity: 0;
+    animation: fadeInScale 1.5s forwards;
 }
 
 .leaf-decoration.left {
-    top: 50px; /* Adjust vertical position */
+    top: 50px;
+    /* Adjust vertical position */
     left: 0;
-    transform: translateX(-50%); /* Pull half of the image off screen */
-    width: 300px; /* Adjust size as needed */
+    transform: translateX(-50%);
+    /* Pull half of the image off screen */
+    width: 300px;
+    /* Adjust size as needed */
     height: auto;
-    opacity: 0.6; /* Slight transparency */
+    opacity: 0.6;
+    /* Slight transparency */
+    animation-delay: 0.2s;
+}
+
+.leaf-decoration.left:hover {
+    transform: translateX(-40%) rotate(10deg);
 }
 
 .leaf-decoration.right {
-    bottom: 50px; /* Adjust vertical position */
+    bottom: 50px;
+    /* Adjust vertical position */
     right: 0;
-    transform: translateX(50%); /* Pull half of the image off screen */
-    width: 400px; /* Adjust size as needed */
+    transform: translateX(50%);
+    /* Pull half of the image off screen */
+    width: 400px;
+    /* Adjust size as needed */
     height: auto;
-    opacity: 0.6; /* Slight transparency */
+    opacity: 0.6;
+    /* Slight transparency */
+    animation-delay: 0.4s;
+}
+
+.leaf-decoration.right:hover {
+    transform: translateX(40%) rotate(-10deg);
 }
 
 .leaf-decoration img {
@@ -241,19 +476,844 @@ nav button a{
     width: 100%;
     height: 100%;
     background: radial-gradient(circle at 90% 10%, rgba(255, 255, 255, 0.05) 0%, transparent 40%),
-                radial-gradient(circle at 10% 90%, rgba(255, 255, 255, 0.03) 0%, transparent 30%);
-    pointer-events: none; /* Allows clicks to pass through */
+        radial-gradient(circle at 10% 90%, rgba(255, 255, 255, 0.03) 0%, transparent 30%);
+    pointer-events: none;
+    /* Allows clicks to pass through */
     z-index: 0;
 }
 
+/* Animations for menu section */
+@keyframes fadeInSlideUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInScale {
+    0% {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    100% {
+        opacity: 0.6; /* Or desired final opacity */
+        transform: scale(1);
+    }
+}
+
+
+/* menu */
+.food-section {
+    padding: 50px 20px;
+    text-align: center;
+    background-color: #000;
+    /* Dark background */
+    position: relative;
+    /* For the leaf elements */
+    overflow: hidden;
+    /* To contain any absolute positioned elements */
+}
+
+/* Add decorative elements (leaves) if desired */
+.food-section::before,
+.food-section::after {
+    content: '';
+    position: absolute;
+    width: 200px;
+    /* Adjust size as needed */
+    height: 200px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    opacity: 0.8;
+    /* Adjust opacity */
+    transition: transform 0.5s ease;
+    opacity: 0;
+    animation: leafAppear 1.5s forwards;
+}
+
+.food-section::before {
+    background-image: url('photos/leaf (1).png');
+    /* Replace with your leaf image */
+    top: -50px; /* Start off-screen */
+    left: -50px; /* Start off-screen */
+    transform: rotate(10deg);
+    animation-delay: 0.8s;
+}
+
+.food-section:hover::before {
+    transform: rotate(20deg) scale(1.1);
+}
+
+.food-section::after {
+    background-image: url('photos/leaf (1).png');
+    /* Replace with your leaf image */
+    bottom: -50px; /* Start off-screen */
+    right: -50px; /* Start off-screen */
+    transform: rotate(-10deg);
+    animation-delay: 1s;
+}
+
+.food-section:hover::after {
+    transform: rotate(-20deg) scale(1.1);
+}
+
+@keyframes leafAppear {
+    to {
+        opacity: 0.8;
+        top: 0; /* Adjust to final position */
+        left: 0; /* Adjust to final position */
+        bottom: 0; /* Adjust to final position */
+        right: 0; /* Adjust to final position */
+    }
+}
+
+
+/* Section Title */
+.section-title-wrapper {
+    margin-bottom: 50px;
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeInSlideUp 1s forwards;
+    animation-delay: 0.3s;
+}
+
+.section-title-wrapper h2 {
+    font-size: 3em;
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: 1px;
+    transition: color 0.3s ease;
+}
+
+.section-title-wrapper h2:hover {
+    color: #fc8608;
+}
+
+/* Food Item Grid */
+.food-item-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    /* Responsive grid */
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+/* Food Card */
+.food-card {
+    background-color: #1a1a1a;
+    /* Slightly lighter dark background for items */
+    border-radius: 10px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    opacity: 0;
+    transform: scale(0.8);
+    animation: cardScaleIn 0.8s forwards;
+    animation-delay: var(--card-delay); /* Staggered animation */
+}
+
+/* Staggered animation delays for food cards */
+.food-card:nth-child(1) { --card-delay: 0.6s; }
+.food-card:nth-child(2) { --card-delay: 0.7s; }
+.food-card:nth-child(3) { --card-delay: 0.8s; }
+.food-card:nth-child(4) { --card-delay: 0.9s; }
+.food-card:nth-child(5) { --card-delay: 1.0s; }
+.food-card:nth-child(6) { --card-delay: 1.1s; }
+
+@keyframes cardScaleIn {
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+
+.food-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+}
+
+.food-image-container {
+    width: 180px;
+    /* Adjust size of the circular image container */
+    height: 180px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-bottom: 20px;
+    background-color: #fff;
+    /* White background for the plate effect */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 0 0 8px rgba(255, 255, 255, 0.1);
+    /* Subtle border for the plate */
+}
+
+.food-image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    /* Ensures image covers the circle */
+    border-radius: 50%;
+    /* Make image circular within its container */
+    transition: transform 0.3s ease;
+}
+
+.food-card:hover .food-image-container img {
+    transform: scale(1.1);
+}
+
+.food-details-wrapper {
+    width: 100%;
+    text-align: center;
+}
+
+.food-details-wrapper h3 {
+    font-size: 1.3em;
+    margin-bottom: 15px;
+    font-weight: 600;
+    color: #fff;
+    height: 3em;
+    /* Ensure consistent height for titles */
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    /* Limit to 2 lines */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    transition: color 0.3s ease;
+}
+
+.food-details-wrapper h3:hover {
+    color: #FFD700;
+}
+
+.food-card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 0 10px;
+    /* Padding to prevent price and button from touching edges */
+}
+
+.food-card-footer .food-price {
+    font-size: 1.6em;
+    font-weight: 700;
+    color: #FFD700;
+    /* Gold color for price */
+    transition: color 0.3s ease;
+}
+
+.food-card:hover .food-card-footer .food-price {
+    color: #fc8608;
+}
+
+.add-to-order-btn {
+    background-color: #FFD700;
+    /* Gold background for button */
+    color: #000;
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    font-size: 1.2em;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.add-to-order-btn:hover {
+    background-color: #e6c200;
+    /* Slightly darker gold on hover */
+    transform: scale(1.05);
+}
+
+/* View All Button */
+.view-all-button-wrapper {
+    margin-top: 60px;
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeInSlideUp 1s forwards;
+    animation-delay: 1.2s; /* Adjust delay as needed */
+}
+
+.view-all-button-wrapper a {
+    text-decoration: none;
+    background-color: #FFD700;
+    /* Gold background */
+    color: #000;
+    border: none;
+    padding: 15px 40px;
+    border-radius: 5px;
+    font-size: 1.1em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.view-all-button-wrapper a:hover {
+    background-color: #e6c200;
+    transform: translateY(-2px);
+}
+
 /* Responsive Design */
-@media (max-width: 992px) {
+/* */
+.second-container {
+    max-width: 1200px;
+    /* Adjust as needed */
+    margin: 0 auto;
+    padding: 0 20px;
+    box-sizing: border-box;
+}
+
+/* Service Section Styling */
+.service-section {
+    position: relative;
+    padding: 100px 0;
+    /* Adjust padding as needed */
+    background-color: #000;
+    /* Ensure black background for the section */
+    overflow: hidden;
+    /* To contain absolute positioned elements */
+}
+
+.service-content {
+    text-align: center;
+    max-width: 800px;
+    /* Limit content width for better readability */
+    margin: 0 auto;
+    position: relative;
+    /* For z-index if needed against bg elements */
+    z-index: 2;
+    /* Ensure content is above background elements */
+    opacity: 0;
+    transform: translateY(50px);
+    animation: fadeInSlideUp 1s forwards;
+    animation-delay: 0.5s;
+}
+
+.service-content h1 {
+    font-family: 'Playfair Display', serif;
+    /* A good serif for headings */
+    font-size: 3.5em;
+    /* Large heading */
+    color: #fff;
+    margin-bottom: 20px;
+    line-height: 1.2;
+    transition: color 0.3s ease, transform 0.5s ease; /* Added transform for animation */
+}
+
+.service-content h1:hover {
+    color: #fc8608;
+    transform: translateX(10px); /* Animation on hover */
+}
+
+.service-content p {
+    font-size: 1.1em;
+    line-height: 1.6;
+    color: #ccc;
+    /* Slightly lighter white for paragraph */
+    margin-bottom: 40px;
+    transition: opacity 0.5s ease; /* Animation for paragraph */
+}
+
+.service-content p:hover {
+    opacity: 0.8; /* Subtle fade on hover */
+}
+
+.service-cards {
+    display: flex;
+    flex-wrap: wrap;
+    /* Allow cards to wrap on smaller screens */
+    justify-content: center;
+    gap: 20px;
+    /* Space between cards */
+    margin-top: 50px;
+}
+
+.service-cards .card {
+    background-color: transparent;
+    border: 1px solid #555;
+    /* Subtle border for cards */
+    color: #fff;
+    padding: 15px 30px;
+    border-radius: 5px;
+    font-size: 1.0em;
+    cursor: pointer;
+    transition: background-color 0.3s ease, border-color 0.3s ease, transform 0.3s ease, color 0.3s ease;
+}
+
+.service-cards .card:hover {
+    background-color: #333;
+    /* Slightly darker on hover */
+    border-color: #777;
+    transform: translateY(-8px) scale(1.02); /* Enhanced animation on hover */
+    color: #fc8608;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4); /* Added subtle shadow */
+}
+
+/* Background Elements (You'll need image assets for these) */
+.bg-elements {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    /* Allows clicks to pass through */
+    z-index: 1;
+    /* Behind the content */
+}
+
+.left-leaf {
+    position: absolute;
+    top: 50%;
+    /* Adjust vertical position */
+    left: 0;
+    transform: translateY(-50%);
+    width: 150px;
+    /* Adjust size */
+    opacity: 0.6;
+    /* Slightly transparent */
+    transition: transform 0.7s ease-in-out, opacity 0.5s ease; /* Smoother animation */
+}
+
+.left-leaf:hover {
+    transform: translateY(-50%) translateX(20px) rotate(15deg); /* More pronounced animation */
+    opacity: 0.8;
+}
+
+.right-leaf {
+    position: absolute;
+    top: 10%;
+    /* Adjust vertical position */
+    right: 0;
+    width: 100px;
+    /* Adjust size */
+    opacity: 0.6;
+    transition: transform 0.7s ease-in-out, opacity 0.5s ease; /* Smoother animation */
+}
+
+.right-leaf:hover {
+    transform: translateY(20px) translateX(-20px) rotate(-15deg); /* More pronounced animation */
+    opacity: 0.8;
+}
+
+.spices {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 250px;
+    /* Adjust size */
+    opacity: 0.8;
+    transition: transform 0.7s ease-in-out, opacity 0.5s ease; /* Smoother animation */
+}
+
+.spices:hover {
+    transform: translateY(-20px) translateX(-20px) scale(1.05); /* More pronounced animation */
+    opacity: 1;
+}
+
+/* Responsive Design */
+/* */
+
+.third-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Testimonials Section */
+.testimonials-section {
+    position: relative;
+    padding: 100px 0;
+    overflow: hidden;
+    /* To contain background elements */
+    background-color: #000;
+    /* Ensure black background */
+}
+
+/* Background Decorative Elements */
+.background-elements .leaf-left {
+    position: absolute;
+    top: 10%;
+    left: 0;
+    width: 150px;
+    /* Adjust size as needed */
+    z-index: 0;
+    /* Behind content */
+    opacity: 0.8;
+    /* Slightly translucent */
+    transition: transform 0.6s ease-out, opacity 0.4s ease; /* Smoother animation */
+}
+
+.background-elements .leaf-left:hover {
+    transform: translateX(15px) rotate(15deg) scale(1.05); /* More pronounced animation */
+    opacity: 1;
+}
+
+.background-elements .speckle-right {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 250px;
+    /* Adjust size as needed */
+    z-index: 0;
+    /* Behind content */
+    opacity: 0.5;
+    /* More translucent */
+    transition: transform 0.6s ease-out, opacity 0.4s ease; /* Smoother animation */
+}
+
+.background-elements .speckle-right:hover {
+    transform: translateX(-15px) rotate(-15deg) scale(1.05); /* More pronounced animation */
+    opacity: 0.7;
+}
+
+/* Section Title */
+.section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 3.5em;
+    text-align: center;
+    margin-bottom: 60px;
+    color: #fff;
+    position: relative;
+    /* To bring it above background elements */
+    z-index: 1;
+    transition: color 0.3s ease, letter-spacing 0.4s ease; /* Added letter-spacing animation */
+}
+
+.section-title:hover {
+    color: #fc8608;
+    letter-spacing: 2px; /* Animation on hover */
+}
+
+/* Testimonial Content Layout */
+.testimonial-content {
+    display: flex;
+    flex-direction: row;
+    /* Default desktop layout */
+    align-items: center;
+    justify-content: center;
+    gap: 50px;
+    /* Space between card and image */
+    position: relative;
+    z-index: 1;
+    /* Ensure content is above background */
+}
+
+/* Testimonial Card (the speech bubble) */
+.testimonial-card {
+    background-color: #1a1a1a;
+    /* Darker grey background for the card */
+    border-radius: 15px;
+    padding: 40px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    flex: 1;
+    /* Allows it to grow and shrink */
+    max-width: 600px;
+    /* Max width for the text block */
+    position: relative;
+    transition: transform 0.4s ease, box-shadow 0.4s ease, background-color 0.3s ease; /* Added background-color animation */
+}
+
+.testimonial-card:hover {
+    transform: translateY(-10px) scale(1.01); /* Enhanced animation */
+    box-shadow: 0 18px 45px rgba(0, 0, 0, 0.8); /* More pronounced shadow */
+    background-color: #2a2a2a; /* Subtle background change */
+}
+
+.customer-feedback {
+    font-size: 1.2em;
+    line-height: 1.6;
+    margin-bottom: 25px;
+    font-style: italic;
+    /* Match the image */
+    color: #f0f0f0;
+    transition: color 0.3s ease; /* Animation for feedback text */
+}
+
+.testimonial-card:hover .customer-feedback {
+    color: #fff; /* Slightly brighter text */
+}
+
+.customer-name {
+    font-size: 1.3em;
+    font-weight: 700;
+    margin-bottom: 5px;
+    color: #fff;
+    transition: color 0.3s ease;
+}
+
+.testimonial-card:hover .customer-name {
+    color: #fc8608; /* Changed to orange on hover */
+}
+
+.customer-title {
+    font-size: 1em;
+    color: #ccc;
+}
+
+/* Customer Image */
+.customer-image {
+    flex-shrink: 0;
+    /* Prevents image from shrinking */
+    width: 300px;
+    /* Fixed width for the image container */
+    height: 300px;
+    /* Fixed height for the image container */
+    border-radius: 50%;
+    /* Makes the image circular */
+    overflow: hidden;
+    /* Hides parts of the image outside the circle */
+    border: 5px solid #333;
+    /* Optional subtle border */
+    display: flex;
+    /* For centering the image inside */
+    justify-content: center;
+    align-items: center;
+    background-color: #222;
+    /* Placeholder background if image isn't perfect circle */
+    transition: transform 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease; /* Added box-shadow animation */
+}
+
+.customer-image:hover {
+    transform: scale(1.1); /* More pronounced scale */
+    border-color: #fc8608; /* Changed to orange on hover */
+    box-shadow: 0 0 20px rgba(252, 134, 8, 0.6); /* Glowing effect */
+}
+
+.customer-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    /* Ensures the image covers the circular area without distortion */
+    display: block;
+    /* Removes extra space below image */
+}
+
+
+/* --- Responsive Design --- */
+
+/* For Tablets and smaller desktops */
+
+/* footer */
+/* Footer Specific Styles */
+.site-footer {
+    background-color: #1a1a1a;
+    /* Dark background for the footer */
+    color: #f0f0f0;
+    /* Light text color */
+    padding: 60px 0 20px;
+    /* Top, horizontal, bottom padding */
+    position: relative;
+    /* For positioning the leaf */
+    overflow: hidden;
+    /* To contain absolute positioned elements like the leaf */
+}
+
+.footer-container {
+    max-width: 1200px;
+    /* Max width for the content */
+    margin: 0 auto;
+    /* Center the container */
+    padding: 0 20px;
+    /* Horizontal padding for smaller screens */
+}
+
+/* Background Leaf Image */
+.footer-leaf {
+    position: absolute;
+    bottom: -10px;
+    /* Adjust as needed */
+    left: -50px;
+    /* Adjust as needed */
+    width: 200px;
+    /* Or adjust to your image size */
+    height: 200px;
+    /* Ensure it's behind text */
+    transition: transform 0.6s ease-out; /* Smoother animation */
+}
+
+.footer-leaf:hover {
+    transform: translateX(20px) rotate(10deg) scale(1.1); /* More pronounced animation */
+}
+
+/* Email Section */
+.footer-email {
+    text-align: center;
+    margin-bottom: 40px;
+    font-size: 2.2em;
+    /* Large font size for the email */
+    font-weight: 600;
+    opacity: 40px;
+}
+
+.footer-email a {
+    color: #fff;
+    text-decoration: none;
+    transition: color 0.3s ease, letter-spacing 0.3s ease; /* Added letter-spacing animation */
+}
+
+.footer-email a:hover {
+    color: #fc8608; /* Changed to orange on hover */
+    letter-spacing: 1px; /* Subtle text animation */
+}
+
+/* Main Footer Sections (Columns) */
+.footer-sections {
+    display: flex;
+    flex-wrap: wrap;
+    /* Allows columns to wrap on smaller screens */
+    justify-content: space-between;
+    /* Distributes space between columns */
+    margin-bottom: 50px;
+    position: relative;
+    /* Ensure text is above leaf */
+    z-index: 1;
+    /* Ensure this content is above the leaf */
+}
+
+.footer-column {
+    flex: 1;
+    /* Allows columns to grow and shrink */
+    min-width: 220px;
+    /* Minimum width before wrapping */
+    margin-bottom: 30px;
+    /* Space between columns when stacked */
+    padding: 0 15px;
+    /* Inner padding for columns */
+}
+
+.footer-column h3 {
+    font-size: 1.1em;
+    font-weight: 500;
+    margin-bottom: 15px;
+    color: #fff;
+    /* Column heading color */
+    transition: color 0.3s ease, transform 0.3s ease; /* Added transform animation */
+}
+
+.footer-column h3:hover {
+    color: #fc8608; /* Changed to orange on hover */
+    transform: translateX(5px); /* Subtle shift on hover */
+}
+
+.footer-column p {
+    font-size: 0.9em;
+    margin-bottom: 5px;
+    color: #ccc;
+    /* Paragraph text color */
+}
+
+.footer-column ul {
+    list-style: none;
+}
+
+.footer-column ul li {
+    margin-bottom: 8px;
+}
+
+.footer-column ul li a {
+    color: #ccc;
+    text-decoration: none;
+    font-size: 0.9em;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.footer-column ul li a:hover {
+    color: #f0f0f0;
+    transform: translateX(8px); /* More pronounced shift on hover */
+}
+
+.address-section .reservation-title {
+    margin-top: 20px;
+    /* Space between address and reservation */
+}
+
+/* Footer Bottom (Copyright) */
+.footer-bottom {
+    text-align: center;
+    font-size: 0.8em;
+    color: #999;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    /* Subtle top border */
+    padding-top: 20px;
+    margin-top: 20px;
+    /* Space above copyright */
+    position: relative;
+    z-index: 1;
+}
+
+/* Responsive Design */
+/* --- Responsive Design --- */
+
+/* For large screens / tablets (e.g., 992px to 1200px) */
+@media (max-width: 1200px) {
+    .food-item-grid {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 25px;
+        padding: 0 15px;
+    }
+}
+
+/* For Tablets (e.g., 768px to 991px) */
+@media (max-width: 991px) {
+
+    /* Header */
+    nav {
+        padding: 0 50px;
+    }
+
+    .header-text {
+        align-content: center;
+        padding: 150px 20px 10px 50px;
+        font-size: 35px;
+    }
+
+    .header-text p {
+        font-size: 25px;
+    }
+
+    .header-text h1 {
+        font-size: 60px;
+    }
+
+    .header-text .chicken {
+        width: 150px;
+        left: 50px;
+    }
+
+    .header-text .coffee {
+        width: 250px;
+        left: 300px;
+        bottom: 0px;
+    }
+
+    .header-text .leaf {
+        width: 80px;
+        left: 300px;
+        top: 150px;
+    }
+
+    /* Menu Section */
     .menu-header h1 {
         font-size: 2.8em;
     }
 
     .menu-item {
-        flex-direction: column; /* Stack image and text vertically */
+        flex-direction: column;
         text-align: center;
         gap: 20px;
         padding: 20px;
@@ -271,18 +1331,193 @@ nav button a{
     .leaf-decoration.left {
         width: 200px;
         top: 20px;
-    transform: rotate(80deg);
+        transform: rotate(80deg) translateX(-50%);
     }
 
     .leaf-decoration.right {
         width: 300px;
         bottom: 20px;
-    transform: rotate(30deg);
+        transform: rotate(30deg) translateX(50%);
+    }
 
+    /* Food Section */
+    .section-title-wrapper h2 {
+        font-size: 2.5em;
+    }
+
+    .food-image-container {
+        width: 160px;
+        height: 160px;
+    }
+
+    .food-details-wrapper h3 {
+        font-size: 1.2em;
+    }
+
+    .food-card-footer .food-price {
+        font-size: 1.4em;
+    }
+
+    /* Service Section */
+    .service-content h1 {
+        font-size: 2.8em;
+    }
+
+    .service-content p {
+        font-size: 1em;
+    }
+
+    .left-leaf {
+        width: 120px;
+    }
+
+    .right-leaf {
+        width: 60px;
+    }
+
+    .spices {
+        width: 200px;
+    }
+
+    /* Testimonials Section */
+    .section-title {
+        font-size: 3em;
+    }
+
+    .testimonial-content {
+        flex-direction: column;
+        gap: 40px;
+    }
+
+    .testimonial-card {
+        max-width: 90%;
+    }
+
+    .customer-image {
+        width: 250px;
+        height: 250px;
+    }
+
+    .background-elements .leaf-left {
+        width: 100px;
+    }
+
+    .background-elements .speckle-right {
+        width: 200px;
+    }
+
+    /* Footer */
+    .footer-email {
+        font-size: 1.8em;
+        margin-bottom: 30px;
+    }
+
+    .footer-sections {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .footer-column {
+        min-width: 100%;
+        padding: 0;
+        margin-bottom: 25px;
+    }
+
+    .footer-leaf {
+        width: 150px;
+        height: 150px;
+        bottom: -5px;
+        left: -5px;
     }
 }
 
-@media (max-width: 768px) {
+/* For Mobile Phones (e.g., up to 767px) */
+@media (max-width: 767px) {
+
+    /* Header */
+    nav {
+        padding: 0 20px;
+    }
+
+    nav ul {
+        display: none;
+        /* Hide nav links by default on mobile */
+        flex-direction: column;
+        width: 100%;
+        background-color: rgba(0, 0, 0, 0.9);
+        position: absolute;
+        top: 60px;
+        /* Adjust based on nav height */
+        left: 0;
+        text-align: center;
+        padding: 20px 0;
+    }
+
+    nav ul.show {
+        display: flex;
+        /* Show when active */
+    }
+
+    nav ul li {
+        margin: 10px 0;
+    }
+
+    nav button {
+        display: none;
+        /* Hide call to action button on mobile nav */
+    }
+
+    /* Hamburger menu icon */
+    .menu-icon {
+        display: block;
+        /* Show hamburger icon */
+        font-size: 30px;
+        cursor: pointer;
+        color: white;
+    }
+
+    .header-text {
+        padding: 100px 20px 10px 20px;
+        font-size: 25px;
+        text-align: center;
+        height: auto;
+        min-height: 100vh;
+        /* Ensure it takes full height */
+    }
+
+    .header-text p {
+        font-size: 18px;
+    }
+
+    .header-text h1 {
+        font-size: 40px;
+    }
+
+    .header-text .chicken,
+    .header-text .coffee,
+    .header-text .leaf {
+        position: absolute;
+    }
+
+    .header-text .chicken {
+        width: 120px;
+        left: 280px;
+        bottom: 0px;
+    }
+
+    .header-text .coffee {
+        width: 200px;
+        left: 50px;
+        bottom: 80px;
+    }
+
+    .header-text .leaf {
+        width: 30px;
+        left: 260px;
+        top: 210px;
+    }
+
+    /* Menu Section */
     .menu-section {
         padding: 50px 0;
     }
@@ -315,253 +1550,22 @@ nav button a{
     .leaf-decoration.left {
         width: 150px;
         top: 10px;
-        transform: translateX(-70%); /* More off-screen */
+        transform: translateX(-70%) rotate(80deg);
     }
 
     .leaf-decoration.right {
         width: 200px;
         bottom: 10px;
-        transform: translateX(70%); /* More off-screen */
-    }
-}
-
-@media (max-width: 480px) {
-    .menu-header h1 {
-        font-size: 1.8em;
+        transform: translateX(70%) rotate(30deg);
     }
 
-    .menu-header p {
-        font-size: 0.9em;
-    }
-
-    .item-image {
-        width: 150px;
-        height: 150px;
-    }
-
-    .item-details h2 {
-        font-size: 1.5em;
-    }
-
-    .item-details p {
-        font-size: 0.8em;
-    }
-
-    .item-details .price {
-        font-size: 1.5em;
-    }
-
-    .leaf-decoration {
-        display: none; /* Hide leaf decorations on very small screens if they become intrusive */
-    }
-}
-/* menu */
-.food-section {
-    padding: 50px 20px;
-    text-align: center;
-    background-color: #000; /* Dark background */
-    position: relative; /* For the leaf elements */
-    overflow: hidden; /* To contain any absolute positioned elements */
-}
-
-/* Add decorative elements (leaves) if desired */
-.food-section::before,
-.food-section::after {
-    content: '';
-    position: absolute;
-    width: 200px; /* Adjust size as needed */
-    height: 200px;
-    background-size: contain;
-    background-repeat: no-repeat;
-    opacity: 0.8; /* Adjust opacity */
-}
-
-.food-section::before {
-    background-image: url('photos/leaf\ \(1\).png'); /* Replace with your leaf image */
-    top: 0;
-    left: 0;
-    transform: rotate(10deg);
-}
-
-.food-section::after {
-    background-image: url('photos/leaf\ \(1\).png'); /* Replace with your leaf image */
-    bottom: 0;
-    right: 0;
-    transform: rotate(-10deg);
-}
-
-/* Section Title */
-.section-title-wrapper {
-    margin-bottom: 50px;
-}
-
-.section-title-wrapper h2 {
-    font-size: 3em;
-    font-weight: 700;
-    color: #fff;
-    letter-spacing: 1px;
-}
-
-/* Food Item Grid */
-.food-item-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Responsive grid */
-    gap: 30px;
-    max-width: 1200px;
-    margin: 0 auto;
-    justify-content: center;
-    align-items: flex-start;
-}
-
-/* Food Card */
-.food-card {
-    background-color: #1a1a1a; /* Slightly lighter dark background for items */
-    border-radius: 10px;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.food-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
-}
-
-.food-image-container {
-    width: 180px; /* Adjust size of the circular image container */
-    height: 180px;
-    border-radius: 50%;
-    overflow: hidden;
-    margin-bottom: 20px;
-    background-color: #fff; /* White background for the plate effect */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    box-shadow: 0 0 0 8px rgba(255, 255, 255, 0.1); /* Subtle border for the plate */
-}
-
-.food-image-container img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover; /* Ensures image covers the circle */
-    border-radius: 50%; /* Make image circular within its container */
-}
-
-.food-details-wrapper {
-    width: 100%;
-    text-align: center;
-}
-
-.food-details-wrapper h3 {
-    font-size: 1.3em;
-    margin-bottom: 15px;
-    font-weight: 600;
-    color: #fff;
-    height: 3em; /* Ensure consistent height for titles */
-    display: -webkit-box;
-    -webkit-line-clamp: 2; /* Limit to 2 lines */
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-.food-card-footer {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    padding: 0 10px; /* Padding to prevent price and button from touching edges */
-}
-
-.food-card-footer .food-price {
-    font-size: 1.6em;
-    font-weight: 700;
-    color: #FFD700; /* Gold color for price */
-}
-
-.add-to-order-btn {
-    background-color: #FFD700; /* Gold background for button */
-    color: #000;
-    border: none;
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    font-size: 1.2em;
-    cursor: pointer;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    transition: background-color 0.3s ease, transform 0.3s ease;
-}
-
-.add-to-order-btn:hover {
-    background-color: #e6c200; /* Slightly darker gold on hover */
-    transform: scale(1.05);
-}
-
-/* View All Button */
-.view-all-button-wrapper {
-    margin-top: 60px;
-}
-
-.view-all-button-wrapper a{
-    text-decoration: none;
-    background-color: #FFD700; /* Gold background */
-    color: #000;
-    border: none;
-    padding: 15px 40px;
-    border-radius: 5px;
-    font-size: 1.1em;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.3s ease;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-}
-
-.view-all-button-wrapper a:hover {
-    background-color: #e6c200;
-    transform: translateY(-2px);
-}
-
-/* Responsive Design */
-@media (max-width: 1200px) {
-    .food-item-grid {
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-        gap: 25px;
-        padding: 0 15px;
-    }
-}
-
-@media (max-width: 992px) {
-    .section-title-wrapper h2 {
-        font-size: 2.5em;
-    }
-
-    .food-image-container {
-        width: 160px;
-        height: 160px;
-    }
-
-    .food-details-wrapper h3 {
-        font-size: 1.2em;
-    }
-
-    .food-card-footer .food-price {
-        font-size: 1.4em;
-    }
-}
-
-@media (max-width: 768px) {
+    /* Food Section */
     .food-section {
         padding: 40px 15px;
     }
 
     .section-title-wrapper h2 {
-        font-size: 2em;
+        font-size: 2.5em;
         margin-bottom: 40px;
     }
 
@@ -589,7 +1593,7 @@ nav button a{
         font-size: 1em;
     }
 
-    .view-all-button-wrapper button {
+    .view-all-button-wrapper a {
         padding: 12px 30px;
         font-size: 1em;
     }
@@ -599,178 +1603,8 @@ nav button a{
         width: 150px;
         height: 150px;
     }
-}
 
-@media (max-width: 576px) {
-    .food-section {
-        padding: 30px 10px;
-    }
-
-    .section-title-wrapper h2 {
-        font-size: 1.8em;
-        margin-bottom: 30px;
-    }
-
-    .food-item-grid {
-        grid-template-columns: 1fr; /* Single column for very small screens */
-        gap: 25px;
-    }
-
-    .food-card {
-        padding: 15px;
-    }
-
-    .food-image-container {
-        width: 150px; /* Slightly larger in single column to make it prominent */
-        height: 150px;
-    }
-
-    .food-details-wrapper h3 {
-        font-size: 1.2em;
-    }
-
-    .food-card-footer .food-price {
-        font-size: 1.5em;
-    }
-
-    .add-to-order-btn {
-        width: 40px;
-        height: 40px;
-        font-size: 1.2em;
-    }
-
-    .view-all-button-wrapper {
-        margin-top: 40px;
-    }
-
-    .food-section::before,
-    .food-section::after {
-        display: none; /* Hide decorative elements on very small screens */
-    }
-}
-/*  */
-.second-container {
-    max-width: 1200px; /* Adjust as needed */
-    margin: 0 auto;
-    padding: 0 20px;
-    box-sizing: border-box;
-}
-
-/* Service Section Styling */
-.service-section {
-    position: relative;
-    padding: 100px 0; /* Adjust padding as needed */
-    background-color: #000; /* Ensure black background for the section */
-    overflow: hidden; /* To contain absolute positioned elements */
-}
-
-.service-content {
-    text-align: center;
-    max-width: 800px; /* Limit content width for better readability */
-    margin: 0 auto;
-    position: relative; /* For z-index if needed against bg elements */
-    z-index: 2; /* Ensure content is above background elements */
-}
-
-.service-content h1 {
-    font-family: 'Playfair Display', serif; /* A good serif for headings */
-    font-size: 3.5em; /* Large heading */
-    color: #fff;
-    margin-bottom: 20px;
-    line-height: 1.2;
-}
-
-.service-content p {
-    font-size: 1.1em;
-    line-height: 1.6;
-    color: #ccc; /* Slightly lighter white for paragraph */
-    margin-bottom: 40px;
-}
-
-.service-cards {
-    display: flex;
-    flex-wrap: wrap; /* Allow cards to wrap on smaller screens */
-    justify-content: center;
-    gap: 20px; /* Space between cards */
-    margin-top: 50px;
-}
-
-.service-cards .card {
-    background-color: transparent;
-    border: 1px solid #555; /* Subtle border for cards */
-    color: #fff;
-    padding: 15px 30px;
-    border-radius: 5px;
-    font-size: 1.0em;
-    cursor: pointer;
-    transition: background-color 0.3s ease, border-color 0.3s ease;
-}
-
-.service-cards .card:hover {
-    background-color: #333; /* Slightly darker on hover */
-    border-color: #777;
-}
-
-/* Background Elements (You'll need image assets for these) */
-.bg-elements {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none; /* Allows clicks to pass through */
-    z-index: 1; /* Behind the content */
-}
-
-.left-leaf {
-    position: absolute;
-    top: 50%; /* Adjust vertical position */
-    left: 0;
-    transform: translateY(-50%);
-    width: 150px; /* Adjust size */
-    opacity: 0.6; /* Slightly transparent */
-}
-
-.right-leaf {
-    position: absolute;
-    top: 10%; /* Adjust vertical position */
-    right: 0;
-    width: 200px; /* Adjust size */
-    opacity: 0.6;
-}
-
-.spices {
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    width: 250px; /* Adjust size */
-    opacity: 0.8;
-}
-
-/* Responsive Design */
-@media (max-width: 1024px) {
-    .service-content h1 {
-        font-size: 2.8em;
-    }
-
-    .service-content p {
-        font-size: 1em;
-    }
-
-    .left-leaf {
-        width: 120px;
-    }
-
-    .right-leaf {
-        width: 60px;
-    }
-
-    .spices {
-        width: 200px;
-    }
-}
-
-@media (max-width: 768px) {
+    /* Service Section */
     .service-section {
         padding: 80px 0;
     }
@@ -798,7 +1632,7 @@ nav button a{
     }
 
     .right-leaf {
-        display: none; /* Hide smaller decorative elements on very small screens */
+        display: none;
     }
 
     .spices {
@@ -806,189 +1640,8 @@ nav button a{
         bottom: 10px;
         right: 10px;
     }
-}
 
-@media (max-width: 480px) {
-    .service-section {
-        padding: 60px 0;
-    }
-
-    .service-content h1 {
-        font-size: 1.8em;
-    }
-
-    .service-content p {
-        font-size: 0.9em;
-        margin-bottom: 30px;
-    }
-
-    .service-cards {
-        flex-direction: column; /* Stack cards vertically */
-        align-items: center;
-        gap: 10px;
-    }
-
-    .service-cards .card {
-        width: 80%; /* Make cards take more width */
-        max-width: 250px; /* Limit max width for stacking */
-        padding: 10px 20px;
-        font-size: 0.9em;
-    }
-
-    .left-leaf {
-        width: 80px;
-        top: 70%;
-    }
-
-    .spices {
-        width: 100px;
-        bottom: 5px;
-        right: 5px;
-    }
-}
-/*  */
-
-.third-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
-}
-
-/* Testimonials Section */
-.testimonials-section {
-    position: relative;
-    padding: 100px 0;
-    overflow: hidden; /* To contain background elements */
-    background-color: #000; /* Ensure black background */
-}
-
-/* Background Decorative Elements */
-.background-elements .leaf-left {
-    position: absolute;
-    top: 10%;
-    left: 0;
-    width: 150px; /* Adjust size as needed */
-    z-index: 0; /* Behind content */
-    opacity: 0.8; /* Slightly translucent */
-}
-
-.background-elements .speckle-right {
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 250px; /* Adjust size as needed */
-    z-index: 0; /* Behind content */
-    opacity: 0.5; /* More translucent */
-}
-
-/* Section Title */
-.section-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 3.5em;
-    text-align: center;
-    margin-bottom: 60px;
-    color: #fff;
-    position: relative; /* To bring it above background elements */
-    z-index: 1;
-}
-
-/* Testimonial Content Layout */
-.testimonial-content {
-    display: flex;
-    flex-direction: row; /* Default desktop layout */
-    align-items: center;
-    justify-content: center;
-    gap: 50px; /* Space between card and image */
-    position: relative;
-    z-index: 1; /* Ensure content is above background */
-}
-
-/* Testimonial Card (the speech bubble) */
-.testimonial-card {
-    background-color: #1a1a1a; /* Darker grey background for the card */
-    border-radius: 15px;
-    padding: 40px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-    flex: 1; /* Allows it to grow and shrink */
-    max-width: 600px; /* Max width for the text block */
-    position: relative;
-}
-
-.customer-feedback {
-    font-size: 1.2em;
-    line-height: 1.6;
-    margin-bottom: 25px;
-    font-style: italic; /* Match the image */
-    color: #f0f0f0;
-}
-
-.customer-name {
-    font-size: 1.3em;
-    font-weight: 700;
-    margin-bottom: 5px;
-    color: #fff;
-}
-
-.customer-title {
-    font-size: 1em;
-    color: #ccc;
-}
-
-/* Customer Image */
-.customer-image {
-    flex-shrink: 0; /* Prevents image from shrinking */
-    width: 300px; /* Fixed width for the image container */
-    height: 300px; /* Fixed height for the image container */
-    border-radius: 50%; /* Makes the image circular */
-    overflow: hidden; /* Hides parts of the image outside the circle */
-    border: 5px solid #333; /* Optional subtle border */
-    display: flex; /* For centering the image inside */
-    justify-content: center;
-    align-items: center;
-    background-color: #222; /* Placeholder background if image isn't perfect circle */
-}
-
-.customer-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover; /* Ensures the image covers the circular area without distortion */
-    display: block; /* Removes extra space below image */
-}
-
-
-/* --- Responsive Design --- */
-
-/* For Tablets and smaller desktops */
-@media (max-width: 1024px) {
-    .section-title {
-        font-size: 3em;
-    }
-
-    .testimonial-content {
-        flex-direction: column; /* Stack vertically */
-        gap: 40px;
-    }
-
-    .testimonial-card {
-        max-width: 90%; /* Wider on smaller screens */
-    }
-
-    .customer-image {
-        width: 250px;
-        height: 250px;
-    }
-
-    .background-elements .leaf-left {
-        width: 100px;
-    }
-
-    .background-elements .speckle-right {
-        width: 200px;
-    }
-}
-
-/* For Mobile Phones */
-@media (max-width: 768px) {
+    /* Testimonials Section */
     .testimonials-section {
         padding: 60px 0;
     }
@@ -996,10 +1649,6 @@ nav button a{
     .section-title {
         font-size: 2.5em;
         margin-bottom: 40px;
-    }
-
-    .testimonial-content {
-        gap: 30px;
     }
 
     .testimonial-card {
@@ -1030,9 +1679,178 @@ nav button a{
         width: 150px;
         top: 0;
     }
+
+    /* Footer */
+    .site-footer {
+        padding: 40px 0 15px;
+    }
+
+    .footer-email {
+        font-size: 1.5em;
+        margin-bottom: 25px;
+    }
+
+    .footer-column h3 {
+        font-size: 1em;
+        margin-bottom: 10px;
+    }
+
+    .footer-column p,
+    .footer-column ul li a {
+        font-size: 0.85em;
+    }
+
+    .footer-leaf {
+        width: 100px;
+        height: 100px;
+        bottom: 0;
+        left: 0;
+    }
 }
 
+/* For Very Small Mobile Phones (e.g., up to 480px) */
 @media (max-width: 480px) {
+
+    /* Header */
+    .header-text {
+        font-size: 20px;
+        padding: 80px 15px 10px 15px;
+    }
+
+    .header-text p {
+        font-size: 16px;
+    }
+
+    .header-text h1 {
+        font-size: 30px;
+    }
+
+    .header-text .chicken,
+    .header-text .coffee,
+    .header-text .leaf {
+        width: 80px;
+        /* Even smaller on very small screens */
+    }
+
+    /* Menu Section */
+    .menu-header h1 {
+        font-size: 1.8em;
+    }
+
+    .menu-header p {
+        font-size: 0.9em;
+    }
+
+    .item-image {
+        width: 150px;
+        height: 150px;
+    }
+
+    .item-details h2 {
+        font-size: 1.5em;
+    }
+
+    .item-details p {
+        font-size: 0.8em;
+    }
+
+    .item-details .price {
+        font-size: 1.5em;
+    }
+
+    .leaf-decoration {
+        display: none;
+        /* Hide leaf decorations on very small screens if they become intrusive */
+    }
+
+    /* Food Section */
+    .food-section {
+        padding: 30px 10px;
+    }
+
+    .section-title-wrapper h2 {
+        font-size: 1.8em;
+        margin-bottom: 30px;
+    }
+
+    .food-item-grid {
+        grid-template-columns: 1fr;
+        /* Single column for very small screens */
+        gap: 25px;
+    }
+
+    .food-card {
+        padding: 15px;
+    }
+
+    .food-image-container {
+        width: 150px;
+        height: 150px;
+    }
+
+    .food-details-wrapper h3 {
+        font-size: 1.2em;
+    }
+
+    .food-card-footer .food-price {
+        font-size: 1.5em;
+    }
+
+    .add-to-order-btn {
+        width: 40px;
+        height: 40px;
+        font-size: 1.2em;
+    }
+
+    .view-all-button-wrapper {
+        margin-top: 40px;
+    }
+
+    .food-section::before,
+    .food-section::after {
+        display: none;
+        /* Hide decorative elements on very small screens */
+    }
+
+    /* Service Section */
+    .service-section {
+        padding: 60px 0;
+    }
+
+    .service-content h1 {
+        font-size: 1.8em;
+    }
+
+    .service-content p {
+        font-size: 0.9em;
+        margin-bottom: 30px;
+    }
+
+    .service-cards {
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .service-cards .card {
+        width: 80%;
+        max-width: 250px;
+        padding: 10px 20px;
+        font-size: 0.9em;
+    }
+
+    .left-leaf {
+        width: 80px;
+        top: 70%;
+    }
+
+    .spices {
+        width: 100px;
+        bottom: 5px;
+        right: 5px;
+    }
+
+    /* Testimonials Section */
     .testimonials-section {
         padding: 40px 0;
     }
@@ -1060,173 +1878,10 @@ nav button a{
     }
 
     .background-elements .leaf-left {
-        display: none; /* Hide on very small screens if too distracting */
+        display: none;
     }
 
     .background-elements .speckle-right {
         width: 100px;
-    }
-}
-/* footer */
-/* Footer Specific Styles */
-.site-footer {
-    background-color: #1a1a1a; /* Dark background for the footer */
-    color: #f0f0f0; /* Light text color */
-    padding: 60px 0 20px; /* Top, horizontal, bottom padding */
-    position: relative; /* For positioning the leaf */
-    overflow: hidden; /* To contain absolute positioned elements like the leaf */
-}
-
-.footer-container {
-    max-width: 1200px; /* Max width for the content */
-    margin: 0 auto; /* Center the container */
-    padding: 0 20px; /* Horizontal padding for smaller screens */
-}
-
-/* Background Leaf Image */
-.footer-leaf{
-    position: absolute;
-    bottom: -10px; /* Adjust as needed */
-    left: -50px; /* Adjust as needed */
-    width: 200px; /* Or adjust to your image size */
-    height: 200px; /* Ensure it's behind text */
-
-}
-
-/* Email Section */
-.footer-email {
-    text-align: center;
-    margin-bottom: 40px;
-    font-size: 2.2em; /* Large font size for the email */
-    font-weight: 600;
-    opacity: 40px;
-}
-
-.footer-email a {
-    color: #fff;
-    text-decoration: none;
-    transition: color 0.3s ease;
-}
-
-.footer-email a:hover {
-    color: #aaa;
-}
-
-/* Main Footer Sections (Columns) */
-.footer-sections {
-    display: flex;
-    flex-wrap: wrap; /* Allows columns to wrap on smaller screens */
-    justify-content: space-between; /* Distributes space between columns */
-    margin-bottom: 50px;
-    position: relative; /* Ensure text is above leaf */
-    z-index: 1; /* Ensure this content is above the leaf */
-}
-
-.footer-column {
-    flex: 1; /* Allows columns to grow and shrink */
-    min-width: 220px; /* Minimum width before wrapping */
-    margin-bottom: 30px; /* Space between columns when stacked */
-    padding: 0 15px; /* Inner padding for columns */
-}
-
-.footer-column h3 {
-    font-size: 1.1em;
-    font-weight: 500;
-    margin-bottom: 15px;
-    color: #fff; /* Column heading color */
-}
-
-.footer-column p {
-    font-size: 0.9em;
-    margin-bottom: 5px;
-    color: #ccc; /* Paragraph text color */
-}
-
-.footer-column ul {
-    list-style: none;
-}
-
-.footer-column ul li {
-    margin-bottom: 8px;
-}
-
-.footer-column ul li a {
-    color: #ccc;
-    text-decoration: none;
-    font-size: 0.9em;
-    transition: color 0.3s ease;
-}
-
-.footer-column ul li a:hover {
-    color: #f0f0f0;
-}
-
-.address-section .reservation-title {
-    margin-top: 20px; /* Space between address and reservation */
-}
-
-/* Footer Bottom (Copyright) */
-.footer-bottom {
-    text-align: center;
-    font-size: 0.8em;
-    color: #999;
-    border-top: 1px solid rgba(255, 255, 255, 0.1); /* Subtle top border */
-    padding-top: 20px;
-    margin-top: 20px; /* Space above copyright */
-    position: relative;
-    z-index: 1;
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
-    .footer-email {
-        font-size: 1.8em;
-        margin-bottom: 30px;
-    }
-
-    .footer-sections {
-        flex-direction: column; /* Stack columns vertically */
-        align-items: flex-start; /* Align columns to the left */
-    }
-
-    .footer-column {
-        min-width: 100%; /* Full width for stacked columns */
-        padding: 0; /* Remove inner padding for stacked columns if desired */
-        margin-bottom: 25px;
-    }
-
-    .footer-leaf {
-        width: 150px;
-        height: 150px;
-        bottom: -5px;
-        left: -5px;
-    }
-}
-
-@media (max-width: 480px) {
-    .site-footer {
-        padding: 40px 0 15px;
-    }
-
-    .footer-email {
-        font-size: 1.5em;
-        margin-bottom: 25px;
-    }
-
-    .footer-column h3 {
-        font-size: 1em;
-        margin-bottom: 10px;
-    }
-
-    .footer-column p,
-    .footer-column ul li a {
-        font-size: 0.85em;
-    }
-
-    .footer-leaf {
-        width: 100px;
-        height: 100px;
-        bottom: 0;
-        left: 0;
     }
 }
