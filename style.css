@@ -1989,3 +1989,96 @@ nav button:hover a {
         right: 5px;
     }
 }
+/* water */
+#water{
+    margin: auto;/* Include padding in the element's total width and height */
+}
+.wavah-content-wrapper {
+    display: flex;
+    flex-wrap: wrap; /* Allows items to wrap onto the next line on smaller screens */
+    width: 90%; /* Adjust as needed */
+    max-width: 1200px; /* Max width for larger screens */
+    background-color: #333; /* Darker background for the container */
+    border-radius: 10px;
+    overflow: hidden; /* Ensures content within rounds nicely */
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5); /* Subtle shadow */
+}
+
+.wavah-image-section, .wavah-map-section {
+    flex: 1; /* Each panel takes equal space */
+    min-width: 300px; /* Minimum width before wrapping */
+    padding: 20px;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+.wavah-image-section {
+    background-color: #222; /* Slightly different background for image section */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.wavah-image-section img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.wavah-image-section h2, .wavah-map-section h2 {
+    color: #cd760c; /* Green accent for headings */
+    margin-bottom: 15px;
+}
+
+.wavah-map-section {
+    background-color: #2a2a2a; /* Slightly different background for map section */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.wavah-map-section iframe {
+    width: 100%;
+    height: 400px; /* Adjust map height as needed */
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .wavah-content-wrapper {
+        flex-direction: column; /* Stacks sections vertically on smaller screens */
+        width: 95%;
+    }
+
+    .wavah-image-section, .wavah-map-section {
+        min-width: unset; /* Remove min-width when stacked */
+        width: 100%; /* Take full width when stacked */
+    }
+
+    .wavah-map-section iframe {
+        height: 300px; /* Adjust map height for smaller screens */
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        padding: 10px;
+    }
+
+    .wavah-content-wrapper {
+        border-radius: 5px;
+    }
+
+    .wavah-image-section, .wavah-map-section {
+        padding: 15px;
+    }
+
+    .wavah-image-section h2, .wavah-map-section h2 {
+        font-size: 1.5em;
+    }
+}
