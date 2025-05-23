@@ -57,3 +57,18 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 });
+// menu
+// Get the necessary elements
+const openMenuBtn = document.querySelector('nav .fa-solid.fa-bars');
+const closeMenuBtn = document.querySelector('nav ul .fa-solid.fa-circle-xmark');
+const mobileMenu = document.querySelector('nav ul');
+
+// Add event listener for the menu bars icon to open the menu
+openMenuBtn.addEventListener('click', () => {
+    mobileMenu.classList.add('show');
+});
+
+// Add event listener for the 'x' icon to close the menu
+closeMenuBtn.addEventListener('click', () => {
+    mobileMenu.classList.remove('show');
+});

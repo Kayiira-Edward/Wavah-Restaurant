@@ -4,13 +4,13 @@
     box-sizing: border-box;
 }
 html{
-    scroll-behavior: smoothm;
+    scroll-behavior: smooth;
 }
 body {
     font-family: 'Arial', sans-serif;
     background-color: #000000;
     color: #ffffff;
-    overflow-x: hidden; /* Prevent horizontal scroll due to animations */
+    overflow-x: hidden; 
 }
 
 #header {
@@ -19,13 +19,10 @@ body {
     background-image: url("photos/head-bg.jpg");
     background-size: cover;
     background-position: center;
-    overflow: hidden; /* Hide overflowing elements for animations */
+    overflow: hidden; 
 }
 
-/* .container{
-    padding: 10px 10%;
 
-} */
 nav {
     display: flex;
     align-items: center;
@@ -35,8 +32,8 @@ nav {
     background: linear-gradient(to right, black 30%, transparent 100%);
     position: fixed;
     width: 100%;
-    z-index: 1000; /* Ensure nav is on top */
-    transform: translateY(-100%); /* Start off-screen */
+    z-index: 1000; 
+    transform: translateY(-100%); 
     animation: navSlideIn 0.8s forwards;
     animation-delay: 0.5s;
 }
@@ -63,11 +60,11 @@ nav ul li {
 nav ul li a {
     color: white;
     text-decoration: none;
-    position: relative; /* For the underline effect */
+    position: relative; 
     transition: color 0.3s ease;
     opacity: 0;
     animation: fadeIn 0.8s forwards;
-    animation-delay: var(--delay); /* Use CSS variables for staggered animation */
+    animation-delay: var(--delay); 
 }
 
 nav ul li a::after {
@@ -117,6 +114,12 @@ nav button:hover {
 nav button:hover a {
     color: rgb(255, 255, 255);
 }
+@media (min-width: 600px){
+    .fa-solid{
+        display: none;
+    }
+}
+
 
 .header-text {
     background: linear-gradient(to right, black 30%, transparent 100%);
@@ -124,7 +127,7 @@ nav button:hover a {
     font-size: 40px;
     width: 100%;
     height: 100vh;
-    position: relative; /* For absolute positioning of elements */
+    position: relative; 
     overflow: hidden;
 }
 
@@ -180,7 +183,7 @@ nav button:hover a {
     position: absolute;
     width: 200px;
     left: 100px;
-    bottom: -200px; /* Start off-screen */
+    bottom: -200px; 
     transition: transform 0.3s ease;
     animation: slideInUp 1s forwards;
     animation-delay: 2.8s;
@@ -194,7 +197,7 @@ nav button:hover a {
     position: absolute;
     width: 300px;
     left: 400px;
-    bottom: -200px; /* Start off-screen */
+    bottom: -100px; 
     transition: transform 0.3s ease;
     animation: slideInUp 1s forwards;
     animation-delay: 3s;
@@ -208,7 +211,7 @@ nav button:hover a {
     position: absolute;
     width: 100px;
     left: 400px;
-    top: 0px; /* Start off-screen */
+    top: 0px; 
     transform: rotate(60deg);
     transition: transform 0.3s ease;
     animation: slideInDown 1s forwards;
@@ -219,7 +222,7 @@ nav button:hover a {
     transform: rotate(70deg) scale(1.1);
 }
 
-/* General Animations */
+/* Animations */
 @keyframes fadeIn {
     to {
         opacity: 1;
@@ -234,13 +237,13 @@ nav button:hover a {
 
 @keyframes slideInUp {
     to {
-        bottom: 10px; /* Adjust to final position */
+        bottom: 10px; 
     }
 }
 
 @keyframes slideInDown {
     to {
-        top: 170px; /* Adjust to final position */
+        top: 170px; 
     }
 }
 
@@ -256,45 +259,38 @@ nav button:hover a {
 }
 
 
-/* pre-menu */
+
 .container {
     max-width: 1200px;
     margin: 0 auto;
     padding: 20px;
     position: relative;
-    /* For z-index to bring content above decorations */
     z-index: 1;
 }
 
-/* Menu Section Styles */
 .menu-section {
     position: relative;
     padding: 80px 0;
-    /* Adjust padding as needed */
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     min-height: 100vh;
-    /* Make section at least full viewport height */
     overflow: hidden;
-    /* Hide overflowing parts of background elements */
 }
 
-/* Menu Header Styles */
 .menu-header {
     text-align: center;
     margin-bottom: 60px;
     opacity: 0;
     transform: translateY(50px);
     animation: fadeInSlideUp 1s forwards;
-    animation-delay: 0.5s; /* Adjust delay as needed */
+    animation-delay: 0.5s; 
 }
 
 .menu-header h1 {
     font-family: 'Playfair Display', serif;
     font-size: 3.5em;
-    /* Adjust as needed */
     line-height: 1.2;
     margin-bottom: 15px;
     transition: color 0.3s ease;
@@ -316,22 +312,18 @@ nav button:hover a {
     display: flex;
     align-items: center;
     gap: 40px;
-    /* Space between image and text */
     max-width: 900px;
-    margin: 30px auto; /* Add margin to separate items */
+    margin: 30px auto; 
     background-color: rgba(0, 0, 0, 0.5);
-    /* Slightly transparent background for the item card if desired */
     padding: 30px;
     border-radius: 10px;
     flex-wrap: wrap;
-    /* Allow wrapping on smaller screens */
     justify-content: center;
-    /* Center items when wrapped */
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     opacity: 0;
     transform: translateY(50px);
     animation: fadeInSlideUp 1s forwards;
-    animation-delay: var(--item-delay); /* Staggered animation */
+    animation-delay: var(--item-delay); 
 }
 
 .menu-item:nth-child(1) { --item-delay: 0.7s; }
@@ -346,15 +338,10 @@ nav button:hover a {
 
 .item-image {
     flex-shrink: 0;
-    /* Prevent image from shrinking */
     width: 300px;
-    /* Adjust image width */
     height: 300px;
-    /* Adjust image height to make it square or desired ratio */
     overflow: hidden;
-    /* Hide parts of the image if it exceeds its container */
     border-radius: 50%;
-    /* Make the image circular if desired, or remove for rectangular */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -364,10 +351,8 @@ nav button:hover a {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    /* Cover the container while maintaining aspect ratio */
     display: block;
     transform: rotate(-10deg);
-    /* Slight rotation as seen in the image */
     transition: transform 0.3s ease;
 }
 
@@ -378,14 +363,12 @@ nav button:hover a {
 .item-details {
     flex-grow: 1;
     max-width: 500px;
-    /* Limit text width */
     text-align: left;
 }
 
 .item-details h2 {
     font-family: 'Playfair Display', serif;
     font-size: 2.5em;
-    /* Adjust as needed */
     margin-bottom: 15px;
     line-height: 1.2;
     transition: color 0.3s ease;
@@ -405,9 +388,7 @@ nav button:hover a {
     font-family: 'Poppins', sans-serif;
     font-weight: 600;
     font-size: 2.2em;
-    /* Adjust as needed */
     color: #ffcc00;
-    /* Example accent color for price, adjust to your brand */
     transition: transform 0.3s ease;
 }
 
@@ -415,11 +396,9 @@ nav button:hover a {
     transform: translateX(5px);
 }
 
-/* Leaf Decorations (Absolute Positioning) */
 .leaf-decoration {
     position: absolute;
     z-index: 0;
-    /* Behind the content */
     transition: transform 0.5s ease;
     opacity: 0;
     animation: fadeInScale 1.5s forwards;
@@ -427,15 +406,11 @@ nav button:hover a {
 
 .leaf-decoration.left {
     top: 50px;
-    /* Adjust vertical position */
     left: 0;
     transform: translateX(-50%);
-    /* Pull half of the image off screen */
     width: 300px;
-    /* Adjust size as needed */
     height: auto;
     opacity: 0.6;
-    /* Slight transparency */
     animation-delay: 0.2s;
 }
 
@@ -445,15 +420,11 @@ nav button:hover a {
 
 .leaf-decoration.right {
     bottom: 50px;
-    /* Adjust vertical position */
     right: 0;
     transform: translateX(50%);
-    /* Pull half of the image off screen */
     width: 400px;
-    /* Adjust size as needed */
     height: auto;
     opacity: 0.6;
-    /* Slight transparency */
     animation-delay: 0.4s;
 }
 
@@ -467,7 +438,6 @@ nav button:hover a {
     display: block;
 }
 
-/* Background Splatter Effect (Optional - More advanced CSS) */
 .menu-section::after {
     content: '';
     position: absolute;
@@ -478,7 +448,6 @@ nav button:hover a {
     background: radial-gradient(circle at 90% 10%, rgba(255, 255, 255, 0.05) 0%, transparent 40%),
         radial-gradient(circle at 10% 90%, rgba(255, 255, 255, 0.03) 0%, transparent 30%);
     pointer-events: none;
-    /* Allows clicks to pass through */
     z-index: 0;
 }
 
@@ -507,11 +476,8 @@ nav button:hover a {
     padding: 50px 20px;
     text-align: center;
     background-color: #000;
-    /* Dark background */
     position: relative;
-    /* For the leaf elements */
     overflow: hidden;
-    /* To contain any absolute positioned elements */
 }
 
 /* Add decorative elements (leaves) if desired */
@@ -1444,13 +1410,15 @@ nav button:hover a {
         /* Hide nav links by default on mobile */
         flex-direction: column;
         width: 100%;
-        background-color: rgba(0, 0, 0, 0.9);
+        background-color: rgba(0, 0, 0, 0.457);
         position: absolute;
         top: 60px;
         /* Adjust based on nav height */
         left: 0;
         text-align: center;
         padding: 20px 0;
+        height: 50vh;
+        border-radius: 20px;
     }
 
     nav ul.show {
@@ -1460,8 +1428,23 @@ nav button:hover a {
 
     nav ul li {
         margin: 10px 0;
+        display: block;
+        margin-top: 20px;
     }
-
+    nav .fa-solid{
+        color: #e37c05;
+        font-size: 30px;
+        margin-right: 20px;
+    }
+    nav ul .fa-solid{
+        position: absolute;
+        top: 20px ;
+        right: 30px;
+        font-size: 30px;
+    }
+    nav ul .fa-solid:hover{
+        color: #fc8608;
+    }
     nav button {
         display: none;
         /* Hide call to action button on mobile nav */
@@ -1917,7 +1900,7 @@ nav button:hover a {
 
 .image-carousel img {
     width: 200px; /* Initial width of images */
-    height: 150px; /* Initial height of images */
+    height: 200px; /* Initial height of images */
     object-fit: cover; /* Maintain aspect ratio */
     margin: 0 10px; /* Space between images */
     transition: transform 0.3s ease-in-out; /* Smooth transition for scaling */
@@ -1975,8 +1958,8 @@ nav button:hover a {
 
 @media (max-width: 480px) {
     .image-carousel img {
-        width: 120px;
-        height: 80px;
+        width: 150px;
+        height: 100px;
     }
     .nav-arrow {
         font-size: 1.2em;
